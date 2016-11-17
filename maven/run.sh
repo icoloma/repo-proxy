@@ -8,4 +8,4 @@ if [ ! -d /data/nexus ]; then
 fi
 
 # docker pull sonatype/docker-nexus
-docker run -d -p 8081:8081 --name nexus -v /data/nexus:/sonatype-work sonatype/nexus:oss
+docker run -d -p 8081:8081 --name nexus --restart=on-failure -v /data/nexus:/sonatype-work sonatype/nexus:oss

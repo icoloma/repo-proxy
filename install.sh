@@ -7,8 +7,10 @@ sudo mkdir /data
 sudo chown ${USER} /data
 echo 'Created by repo-proxy. This folder contains all the repositories' > /data/README
 
-# Install docker
-sudo apt-get install docker.io
+# Install docker. Full set of instructions at 
+# https://docs.docker.com/engine/installation/linux/ubuntulinux/
+sudo apt-get install docker-engine
+sudo service docker start
 
 # Uncomment for each repository proxy to install
 # maven/run.sh

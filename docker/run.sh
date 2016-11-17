@@ -5,7 +5,7 @@
 mkdir -p /data/docker
 
 # Launch docker registry
-docker run --name docker-registry -v /data/docker:/tmp/registry-dev registry:2.0
+docker run --name docker-registry --restart=on-failure -v /data/docker:/tmp/registry-dev registry:2.0
 
 # the registry listens on 8082 and redirects to 443 inside the container
 docker run -p 8443:443 \
@@ -17,3 +17,5 @@ docker run -p 8443:443 \
   -v $(pwd)/.htpasswd:/etc/nginx/.htpasswd:ro \
   -v $(pwd)/certs:/etc/nginx/ssl:ro \
   containersol/docker-registry-proxy
+
+  --restart=on-failure
