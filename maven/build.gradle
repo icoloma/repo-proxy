@@ -1,0 +1,13 @@
+// Full documentation, including uploading artifacts, available in
+// https://books.sonatype.com/nexus-book/reference/gradle.html
+apply plugin: 'java'
+
+repositories {
+    maven {
+        url "http://localhost:8081/nexus/content/groups/public"
+    }
+}
+
+dependencies {
+  compile group: 'com.google.guava', name: 'guava', version: '20.0'
+}
