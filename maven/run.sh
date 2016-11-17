@@ -4,8 +4,10 @@
 # Credentials are admin / admin123
 
 if [ ! -d /data/nexus ]; then
-  mkdir -p /data/nexus && chown -R 200 /data/nexus && chmod 755 /data/nexus
+  mkdir -p /data/nexus
+  chmod 777 /data/nexus
+  sudo chown -R 200 /data/nexus
 fi
 
 # docker pull sonatype/docker-nexus
-docker run -d -p 8081:8081 --name nexus --restart=on-failure -v /data/nexus:/nexus-data sonatype/nexus3
+docker run -d -p 8081:8081 --name nexus --restart=on-failure -v /data/nexus:/sonatype-work sonatype/nexus
