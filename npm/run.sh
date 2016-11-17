@@ -6,4 +6,5 @@
 mkdir -p /data/npm && chown -R ${USER} /data/npm && chmod 777 /data/npm
 
 # docker pull kudoz/npm-proxy-cache
-docker run --name npm --restart=on-failure --net=host -p 8080:8080 -v /data/npm:/cache -t kudoz/npm-proxy-cache
+docker run --name npm -d --restart=on-failure --net=host \
+  -p 8080:8080 -v /data/npm:/cache -t kudoz/npm-proxy-cache

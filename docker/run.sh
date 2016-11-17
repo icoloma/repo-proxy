@@ -1,21 +1,16 @@
 #!/bin/bash
-# Pulls docker-registry-proxy
-# Source: https://github.com/ContainerSolutions/docker-registry-proxy
+# Pulls docker-registry-proxy. Source:
+# https://github.com/docker/docker/blob/v1.6.2/docs/sources/articles/registry_mirror.md
+# https://docs.docker.com/registry/deploying/
 
 mkdir -p /data/docker
 
-# Launch docker registry
-docker run --name docker-registry --restart=on-failure -v /data/docker:/tmp/registry-dev registry:2.0
+sudo docker run -p 8082:5000 -d \
+  -e MIRROR_SOURCE=https://registry-1.docker.io \
+  -e MIRROR_SOURCE_INDEX=https://index.docker.io \
+  -v $(pwd)/config.yml:/etc/docker/registry/config.yml \
+  -v /data/docker:/var/lib/registry \
+  --restart=on-failure \
+  --name docker-registry \
+  registry:2.6.0-rc.1
 
-# the registry listens on 8082 and redirects to 443 inside the container
-docker run -p 8443:443 \
-  --name docker-proxy \
-  -e REGISTRY_HOST="docker-registry" \
-  -e REGISTRY_PORT="5000" \
-  -e SERVER_NAME="localhost" \
-  --link docker-registry:docker-registry \
-  -v $(pwd)/.htpasswd:/etc/nginx/.htpasswd:ro \
-  -v $(pwd)/certs:/etc/nginx/ssl:ro \
-  containersol/docker-registry-proxy
-
-  --restart=on-failure

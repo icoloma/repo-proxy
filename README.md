@@ -16,4 +16,4 @@ There is a `test.sh` script for each proxy to check that everything is configure
 
 * Npm will run an npm proxy on 8080
 * Maven will run a nexus repository on port 8081 (user: admin, password: admin123)
-* Docker will run two docker containers: a Docker registry listening on port 5000 and the repo proxy listening on port 8443.
+* Docker will run a registry proxy on port 8082
