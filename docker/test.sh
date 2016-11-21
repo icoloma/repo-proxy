@@ -21,14 +21,6 @@ curl http://localhost:8082/v2/_catalog
 
 DOCKER_OPTS="--registry-mirror http://localhost:8082  --insecure-registry http://localhost:8082"
 
-# Alternatively, run this:
-docker --registry-mirror=https://localhost:8082 daemon
-
 # Pull an image from the proxy
 docker pull wordpress 
-docker pull localhost:8082/wordpress 
 
-# Run an image pulling from the proxy
-docker run localhost:8082/wordpress
-
-# Kubernetes users: just use the full URL format like in the example above
